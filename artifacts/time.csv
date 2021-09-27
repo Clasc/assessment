@@ -1,2 +1,2 @@
-date;time
-27.09.2021; 3h
+date;time;description
+27.09.2021; 3h; Setup projects and docker compose
