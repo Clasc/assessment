@@ -15,8 +15,10 @@ services:
         - db
       container_name: query-service
       ports:
-      - 8001:8001
+      - 8002:8002
       restart: always
+      links:
+        - db
       environment:
         - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/calls
         - SPRING_DATASOURCE_USERNAME=user

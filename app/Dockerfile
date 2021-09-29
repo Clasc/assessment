@@ -1,5 +1,8 @@
 FROM openjdk:11
-CMD [ "./mvn", "install" ]
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM maven:3.8.2-openjdk-11
+WORKDIR /app
+COPY . /app
+RUN mvn -v
+RUN mvn clean install -DskipTests
+ENTRYPOINT ["java","-jar","target/app-0.0.1-SNAPSHOT.jar"]
+EXPOSE 8001
