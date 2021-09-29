@@ -20,13 +20,13 @@ public class CallController {
         this.callService = callService;
     }
 
-    @PostMapping("/api/v1/call")
-    public UUID call(@RequestBody PostCall request) {
-        return callService.addCall(request.getMessage());
+    @GetMapping(path = "/api/v1/calls")
+    public String get() {
+        return callService.getCalls();
     }
 
-    @GetMapping("/api/v1/calls")
-    public String calls() {
-        return callService.getCalls();
+    @PostMapping(path = "/api/v1/call")
+    public UUID call(@RequestBody PostCall request) {
+        return callService.addCall(request.getMessage());
     }
 }
