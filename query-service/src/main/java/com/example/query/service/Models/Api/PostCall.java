@@ -1,4 +1,4 @@
-package com.example.query.service.Models;
+package com.example.query.service.Models.Api;
 
 public class PostCall {
     private String message;

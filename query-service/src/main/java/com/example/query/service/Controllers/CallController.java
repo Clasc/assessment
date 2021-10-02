@@ -1,11 +1,11 @@
 package com.example.query.service.Controllers;
 
-import java.util.UUID;
-
+import java.util.List;
+import com.example.query.service.Models.Api.Call;
+import com.example.query.service.Models.Api.PostCall;
 import com.example.query.service.Services.CallService;
-import com.example.query.service.Models.PostCall;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +20,13 @@ public class CallController {
         this.callService = callService;
     }
 
-    @GetMapping(path = "/api/v1/calls")
-    public String get() {
-        return callService.getCalls();
+    @GetMapping("/api/v1/calls")
+    public ResponseEntity<List<Call>> get() {
+        return ResponseEntity.ok(callService.getCalls());
     }
 
-    @PostMapping(path = "/api/v1/call")
-    public UUID call(@RequestBody PostCall request) {
-        return callService.addCall(request.getMessage());
+    @PostMapping("/api/v1/call")
+    public ResponseEntity<Long> call(@RequestBody PostCall request) {
+        return ResponseEntity.ok(callService.addCall(request.getMessage()));
     }
 }
