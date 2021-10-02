@@ -11,6 +11,8 @@ import com.example.query.service.Models.Entities.CallEntity;
 import com.example.query.service.Repositories.CallRepository;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.modelmapper.config.Configuration.AccessLevel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +29,16 @@ public class CallService {
         System.out.println("received call");
         System.out.println(message);
         var currenttime = new Timestamp(System.currentTimeMillis());
-        var call = new CallEntity("", currenttime);
+        var call = new CallEntity(message, currenttime);
         return callRepo.save(call).getId();
     }
 
     public List<Call> getCalls() {
         var mapper = new ModelMapper();
-        var result = new ArrayList<Call>();
+        mapper.getConfiguration().setFieldMatchingEnabled(true).setFieldAccessLevel(AccessLevel.PRIVATE);
         var entities = callRepo.findAll();
-        mapper.map(entities, result);
-        System.out.println("Entities:");
-        entities.forEach(c -> System.out.println(c));
-        System.out.println("Result:");
-        result.forEach(c -> System.out.println(c));
+        List<Call> result = mapper.map(entities, new TypeToken<ArrayList<Call>>() {
+        }.getType());
         return result;
     }
 }
