@@ -9,14 +9,14 @@ Changing one value will propagate through and change in all depending services.
 
 ## How to use it
 The "app" which is like a frontend for the whole microservice architecture is located in 
-http://localhost:8081
+http://localhost:8001
 
 The Service with direct database access can be called with
-http://localhost:8082
+http://localhost:8002
 
 Routes are:
-GET - http://localhost:8081/api/v1/calls - gets all logged calls
-POST - http://localhost:8081/api/v1/call - adds a new call to log
+GET - http://localhost:8001/api/v1/calls - gets all logged calls
+POST - http://localhost:8001/api/v1/call - adds a new call to log
 
 Example JSON for POST call:
 {
