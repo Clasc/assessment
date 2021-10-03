@@ -1,6 +1,11 @@
 package com.assessment.app.Clients;
 
+import com.assessment.app.Models.PostCall;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -31,8 +36,8 @@ public class QueryServiceClient {
         return responseEntity.getBody();
     }
 
-    public String post(String uri, String message) {
-        HttpEntity<String> requestEntity = new HttpEntity<String>(message, headers);
+    public String post(String uri, PostCall request) {
+        HttpEntity<PostCall> requestEntity = new HttpEntity<PostCall>(request, headers);
         ResponseEntity<String> responseEntity = rest.exchange(host + uri, HttpMethod.POST, requestEntity, String.class);
         this.setStatus(responseEntity.getStatusCode());
         return responseEntity.getBody();
@@ -44,5 +49,11 @@ public class QueryServiceClient {
 
     public void setStatus(HttpStatus status) {
         this.status = status;
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void handleContextRefreshEvent(ApplicationReadyEvent event) {
+        System.out.println("Context started. Sending initial Request...");
+        post("/api/v1/call", new PostCall("startup"));
     }
 }

@@ -1,8 +1,7 @@
 package com.assessment.app.Controllers;
 
-import java.util.List;
-
 import com.assessment.app.Clients.QueryServiceClient;
+import com.assessment.app.Models.PostCall;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +25,8 @@ public class CallController {
     }
 
     @PostMapping("/api/v1/call")
-    public ResponseEntity<String> call(@RequestBody String message) {
-        queryServiceClient.post("/api/v1/call", message);
+    public ResponseEntity<String> call(@RequestBody PostCall request) {
+        queryServiceClient.post("/api/v1/call", request);
         return ResponseEntity.ok("ok");
     }
 }
