@@ -2,3 +2,4 @@ date;time;description
 27.09.2021; 3h; Setup projects and docker compose.
 30.09.2021; 2h; Add projects with dependencies. Fix build issues.
 02.10.2021; 4h; Fix Db Connection and add endpoints. Add ModelMapper.
+03.10.2021; 6h; Add initial call from Service 2 to Service 1 and add all environment variables and .env file
