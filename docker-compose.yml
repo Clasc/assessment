@@ -5,9 +5,9 @@ services:
         image: postgres
         restart: always
         environment:
-            POSTGRES_DB: calls
-            POSTGRES_USER: user
-            POSTGRES_PASSWORD: password  
+            POSTGRES_DB: ${CALLS_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         networks:
         - backend
 
@@ -17,16 +17,16 @@ services:
         - db
       container_name: query-service
       ports:
-        - 8002:8002
+        - ${QUERY_SERVICE_PORT}:${QUERY_SERVICE_PORT}
       expose:
         - 8002
       restart: always
       links:
         - db
       environment:
-        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/calls
-        - SPRING_DATASOURCE_USERNAME=user
-        - SPRING_DATASOURCE_PASSWORD=password
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://db:${POSTGRES_PORT}/${CALLS_DB}
+        - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+        - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
         - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       networks:
         - backend
@@ -36,8 +36,11 @@ services:
       build: ./app
       container_name: app
       restart: always
+      environment:
+        - QUERY_SERVICE_PORT=${QUERY_SERVICE_PORT}
+        - QUERY_SERVICE_HOST=http://query-service
       ports:
-        - 8001:8001
+        - ${APP_SERVICE_PORT}:${APP_SERVICE_PORT}
       links:
         - query-service  
       networks:
