@@ -19,7 +19,7 @@ services:
       ports:
         - ${QUERY_SERVICE_PORT}:${QUERY_SERVICE_PORT}
       expose:
-        - 8002
+        - ${QUERY_SERVICE_PORT}
       restart: always
       links:
         - db
