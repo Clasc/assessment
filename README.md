@@ -1,3 +1,4 @@
 # Assessment
-To startup:
-docker-compose
+To run project:
+Run:
+```./startup.sh```
