@@ -32,6 +32,9 @@ services:
       networks:
         - backend
         - frontend
+      volumes:
+        - query:/app/data
+
 
     app:
       build: ./app
@@ -47,6 +50,11 @@ services:
         - query-service  
       networks:
         - frontend
+      volumes:
+        - app:/app/data
 networks:
   backend:
   frontend:
+volumes:
+  app:
+  query:
