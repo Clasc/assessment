@@ -10,11 +10,11 @@ To clean all docker images and eventually delete all volumes (if wanted):
 ```./cleanup.sh```
 
 ## Environment variables
-Environment variables are configured in the .env file located in the root project root.
+Environment variables are configured in the .env file located in the project root.
 Changing one value will propagate through and change in all depending services.
 
 ## How to use it
-The "app" which is like a frontend for the whole microservice architecture is located in   
+The "app" which is acts a frontend for the query service is located in   
 http://localhost:8001
 
 The Service with direct database access can be called with  
