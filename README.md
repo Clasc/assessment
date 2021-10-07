@@ -3,6 +3,12 @@ To run project:
 Run:
 ```./startup.sh```
 
+To shutdown:
+```./shutdown.sh```
+
+To clean all docker images and eventually delete all volumes (if wanted):
+```./cleanup.sh```
+
 ## Environment variables
 Environment variables are configured in the .env file located in the root project root.
 Changing one value will propagate through and change in all depending services.
